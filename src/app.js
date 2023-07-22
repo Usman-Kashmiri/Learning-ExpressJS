@@ -6,7 +6,7 @@ const app = express();
 const router = require("./router");
 const loggerMiddleware = require("./middleware/loggerMiddleware");
 const swaggerUi = require("swagger-ui-express");
-// const swaggerFile = require("../swagger_output.json"); // Generated Swagger file
+const swaggerFile = require("../swagger_output.json"); // Generated Swagger file
 
 // Middlewares
 app.use(express.json());
@@ -18,8 +18,9 @@ app.use(loggerMiddleware);
 
 // router index
 app.use("/", router);
+
 // api doc
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.get("/", (req, res) => {
   res.send("Learning-NodeJS v1.1");
